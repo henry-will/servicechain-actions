@@ -33,6 +33,7 @@ jobs:
 
     - name: Check Files
       run: |
+        sleep 30
         docker-compose -f "docker-compose-servicechain.yml" exec -T EN-0 ls /klaytn/log
         docker-compose -f "docker-compose-servicechain.yml" exec -T SCN-0 ls /klaytn/log        
 

@@ -29,10 +29,10 @@ jobs:
       run: docker-compose -f "docker-compose-servicechain.yml" ps
 
     - name: Check EN Status contrainers
-      run: docker-compose -f "docker-compose-servicechain.yml" exec --tty EN-0 cat /klaytn/log/init.log
+      run: docker-compose -f "docker-compose-servicechain.yml" exec --no-TTY EN-0 cat /klaytn/log/init.log
 
     - name: Check SCN Status contrainers
-      run: docker-compose -f "docker-compose-servicechain.yml" exec --tty SCN-0 cat /klaytn/log/init.log
+      run: docker-compose -f "docker-compose-servicechain.yml" exec --no-TTY SCN-0 cat /klaytn/log/init.log
 
     - name: Stop containers
       if: always()

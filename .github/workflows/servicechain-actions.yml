@@ -24,7 +24,10 @@ jobs:
 
     - name: Do Some Test
       run: echo $GITHUB_SHA
-      
+
+    - name: Check Status contrainers
+      run: docker-compose -f "docker-compose-servicechain.yml" ps
+
     - name: Check EN Status contrainers
       run: docker-compose -f "docker-compose-servicechain.yml" exec --tty EN-0 cat /klaytn/log/init.log
 

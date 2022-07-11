@@ -32,7 +32,9 @@ jobs:
       run: docker-compose -f "docker-compose-servicechain.yml" ps
 
     - name: Check Files
-      run: docker-compose -f "docker-compose-servicechain.yml" exec -T EN-0 ls /klaytn/log
+      run: |
+        docker-compose -f "docker-compose-servicechain.yml" exec -T EN-0 ls /klaytn/log
+        docker-compose -f "docker-compose-servicechain.yml" exec -T SCN-0 ls /klaytn/log        
 
     - name: Check EN Status contrainers
       run: docker-compose -f "docker-compose-servicechain.yml" exec -T EN-0 cat /klaytn/log/init.log

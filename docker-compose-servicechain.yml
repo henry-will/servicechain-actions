@@ -1,6 +1,8 @@
+version: '3.3'
 services:
   CN-0:
     hostname: CN-0
+    container_name: CN-0
     image: klaytn/klaytn:latest
     ports:
       - '32323'
@@ -35,6 +37,7 @@ services:
   PN-0:
     hostname: PN-0
     image: klaytn/klaytn:latest
+    container_name: PN-0
     ports:
       - '32323'
       - '8551'
@@ -69,6 +72,7 @@ services:
   EN-0:
     hostname: EN-0
     image: klaytn/klaytn:latest
+    container_name: EN-0
     ports:
       - '32323'
       - '8102:8551'
@@ -109,6 +113,7 @@ services:
   SCN-0:
     hostname: SCN-0
     image: klaytn/klaytn:latest
+    container_name: SCN-0
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
@@ -157,6 +162,7 @@ services:
   prometheus:
     hostname: prometheus
     image: prom/prometheus:v2.3.2
+    container_name: prometheus
     ports:
       - 9090
     volumes:

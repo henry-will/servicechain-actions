@@ -101,7 +101,7 @@ services:
         echo 'SC_MAIN_BRIDGE_INDEXING=1' >> /klaytn-docker-pkg/conf/kend.conf
         echo 'ADDITIONAL="$$ADDITIONAL --debug --metrics --prometheus"' >> /klaytn-docker-pkg/conf/kend.conf
         /klaytn-docker-pkg/bin/kend start
-        sleep 3
+        sleep 20
         parentAccount=`ken attach --exec "personal.importRawKey('1dd4dc19688dde6b519f3d305349fa7cbc6f5c4195e72e0d12b665b2bc39a3a1', '')" http://localhost:8551 | cut -d "\"" -f 2`
         echo "parentAccount is $$parentAccount" >> /klaytn/log/init.log
         ken attach --exec "personal.unlockAccount('$$parentAccount', '', 999999999)" http://localhost:8551 >> /klaytn/log/init.log

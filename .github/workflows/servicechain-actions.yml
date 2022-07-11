@@ -31,16 +31,19 @@ jobs:
     - name: Check Status contrainers
       run: docker-compose -f "docker-compose-servicechain.yml" ps
 
-    - name: Check Files
-      run: |
-        sleep 30
-        docker-compose -f "docker-compose-servicechain.yml" exec -T EN-0 ls /klaytn/log
-        docker-compose -f "docker-compose-servicechain.yml" exec -T SCN-0 ls /klaytn/log        
+    - name: Send klay to parent and child operators, wait more then halve minute for loading SCN
+      run: sleep 30        
 
-    - name: Check EN Status contrainers
+    - name: Check Parent EN Files
+      run: docker-compose -f "docker-compose-servicechain.yml" exec -T EN-0 ls /klaytn/log
+
+    - name: Check Child SCN Files
+      run: docker-compose -f "docker-compose-servicechain.yml" exec -T SCN-0 ls /klaytn/log        
+
+    - name: Check EN Operator
       run: docker-compose -f "docker-compose-servicechain.yml" exec -T EN-0 cat /klaytn/log/init.log
 
-    - name: Check SCN Status contrainers
+    - name: Check SCN Operator
       run: docker-compose -f "docker-compose-servicechain.yml" exec -T SCN-0 cat /klaytn/log/init.log
 
     - name: Stop containers

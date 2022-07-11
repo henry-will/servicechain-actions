@@ -1,0 +1,10 @@
+name: "servicechain-action"
+on:
+  schedule:
+    - cron:  '*/10 * * * *'    # At every 5th minute
+jobs:
+  test_schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Do some work
+        run: echo $GITHUB_SHA

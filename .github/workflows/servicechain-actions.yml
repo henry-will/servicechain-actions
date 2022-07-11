@@ -31,6 +31,9 @@ jobs:
     - name: Check Status contrainers
       run: docker-compose -f "docker-compose-servicechain.yml" ps
 
+    - name: Check Files
+      run: docker-compose -f "docker-compose-servicechain.yml" exec -T EN-0 ls /klyatn/log
+
     - name: Check EN Status contrainers
       run: docker-compose -f "docker-compose-servicechain.yml" exec -T EN-0 cat /klaytn/log/init.log
 

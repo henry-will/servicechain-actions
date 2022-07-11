@@ -2,6 +2,14 @@ name: "servicechain-action"
 on:
   schedule:
     - cron:  '*/10 * * * *'    # At every 5th minute
+ workflow_dispatch:
+    inputs:
+       logLevel:
+          description: 'Log level'     
+          required: true
+          default: 'warning'
+       tags:
+          description: 'Test scenario tags'
 jobs:
   test_schedule:
     runs-on: ubuntu-latest

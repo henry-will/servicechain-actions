@@ -25,7 +25,7 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Start containers
-      run: docker-compose -f "docker-compose-servicechain.yml" up -d --build
+      run: docker-compose -f "docker-compose-servicechain.yml" up -d
 
     - name: Install node
       uses: actions/setup-node@v1

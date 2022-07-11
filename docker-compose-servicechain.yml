@@ -1,5 +1,5 @@
 version: '3'
-name: servicechain-parent-latest-child-latest
+name: servicechain-actions
 services:
   CN-0:
     hostname: CN-0
@@ -31,7 +31,7 @@ services:
         /klaytn-docker-pkg/bin/kcnd start
         tail -F klaytn/log/kcnd.out
     networks:
-      app_net_parent_new_child_new:
+      app_net_actions:
         ipv4_address: 172.16.100.10
     restart: "no"
   PN-0:
@@ -65,7 +65,7 @@ services:
         sleep 1
         tail -F klaytn/log/kpnd.out
     networks:
-      app_net_parent_new_child_new:
+      app_net_actions:
         ipv4_address: 172.16.100.11
     restart: "no"
   EN-0:
@@ -105,7 +105,7 @@ services:
         ken attach --exec "personal.unlockAccount('$$parentAccount', '', 999999999)" http://localhost:8551 >> /klaytn/log/init.log
         tail -F klaytn/log/kend.out
     networks:
-      app_net_parent_new_child_new:
+      app_net_actions:
         ipv4_address: 172.16.100.12
     restart: "no"
   SCN-0:
@@ -153,7 +153,7 @@ services:
         kscn attach --exec "klay.sendTransaction({from:'$$childAccount', to:subbridge.childOperator, value: web3.toPeb(10000000000000000000000000000000, 'KLAY')})" http://localhost:8551 >> /klaytn/log/init.log
         tail -F klaytn/log/kscnd.out
     networks:
-      app_net_parent_new_child_new:
+      app_net_actions:
         ipv4_address: 172.16.100.13
     restart: "no"
   prometheus:
@@ -164,7 +164,7 @@ services:
     volumes:
       - "./prometheus.yml:/etc/prometheus/prometheus.yml"
     networks:
-      app_net_parent_new_child_new:
+      app_net_actions:
         ipv4_address: 172.16.100.9
     restart: "no"
 
@@ -174,9 +174,10 @@ networks:
   # You have to replace all occurance of the bridge name and subnet; in vim, below commands will help.
   # :%s/app_net_my_driver_name/app_net_my_driver_name_1/g
   # :%s/172.16.238/172.16.238/g
-  app_net_parent_new_child_new:
+  app_net_actions:
     driver: bridge
     ipam:
       driver: default
       config:
       - subnet: 172.16.100.0/24
+

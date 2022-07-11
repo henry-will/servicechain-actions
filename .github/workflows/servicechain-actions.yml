@@ -27,8 +27,8 @@ jobs:
       
     - name: Check Status contrainers
       run: |
-        docker exec -it servicechain-actions-EN-0-1 cat /klaytn/log/init.log
-        docker exec -it servicechain-actions-SCN-0-1 cat /klaytn/log/init.log
+        docker exec -it EN-0 cat /klaytn/log/init.log
+        docker exec -it SCN-0 cat /klaytn/log/init.log
 
     - name: Stop containers
       if: always()

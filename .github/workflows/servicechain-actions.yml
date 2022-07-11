@@ -26,7 +26,9 @@ jobs:
       run: echo $GITHUB_SHA
       
     - name: Check Status contrainers
-      run: docker exec -it servicechain-actions cat /klaytn/log/init.log
+      run: |
+        docker exec -it servicechain-actions-EN-0-1 cat /klaytn/log/init.log
+        docker exec -it servicechain-actions-SCN-0-1 cat /klaytn/log/init.log
 
     - name: Stop containers
       if: always()

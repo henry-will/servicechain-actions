@@ -1,7 +1,7 @@
 name: "servicechain-action"
 on:
    schedule:
-     - cron: '5,10,15,20,25 * * * *'
+     - cron: '0,10 * * * *'
    workflow_dispatch:
       inputs:
          logLevel:
@@ -11,32 +11,19 @@ on:
          tags:
             description: 'Test scenario tags'
 jobs:
-  test_schedule:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Do some work
-        run: echo $GITHUB_SHA
-  docker:
+  docker-compose:
     timeout-minutes: 10
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
 
     - name: Start containers
       run: docker-compose -f "docker-compose-servicechain.yml" up -d
 
-    - name: Install node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run tests
-      run: npm run test
+    - name: Do Some Test
+      run: echo $GITHUB_SHA
 
     - name: Stop containers
       if: always()

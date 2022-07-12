@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 if [ $# -lt 2 ]
 then
@@ -26,6 +26,7 @@ echo "parentOperator is $parentOperator"
 
 if [[ $childOperator != "" && $parentOperator != "" ]]; then
   sed "s/{CHILD_OPERATOR}/$childOperator/" $templateFile | sed "s/{PARENT_OPERATOR}/$parentOperator/" > $bridgeInfoFile
+  cat $bridgeInfoFile
 else
   echo "Not found child operator [$childOperator] or parent operator [$parentOperator]"
   exit 1

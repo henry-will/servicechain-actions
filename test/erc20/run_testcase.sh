@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 source setting-001.source
 node erc20-deploy.js
 node erc20-transfer-1step.js

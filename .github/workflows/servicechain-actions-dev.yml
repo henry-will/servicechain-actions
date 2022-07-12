@@ -1,7 +1,5 @@
 name: "servicechain-actions-dev"
 on:
-  schedule:
-    - cron: '10 * * * *'
   workflow_dispatch:
     inputs:
       logLevel:
@@ -25,6 +23,7 @@ jobs:
       uses: actions/checkouts@v3
       with:
         repository: henry-will/klaytn
+        token: ${{ secrets.ACTIONS_PAT }}
         ref: dev
         path: test/klaytn/src
 

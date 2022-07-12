@@ -52,7 +52,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 12
-      run: cd test && npm i
+    - run: cd test && npm i
 
     - name: Test the erc20 value transfer
       run: cd test/erc20 && sh run_testcase.sh

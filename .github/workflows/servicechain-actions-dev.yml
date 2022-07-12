@@ -31,7 +31,7 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-actions@v1
       with:
-        usename: ${{ secrets.DOCKER_HUB_USERNAME }}
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
     - name: Set up Docker Buildx

@@ -1,4 +1,4 @@
-name: "servicechain-actions"
+name: "servicechain-actions-dev"
 on:
   schedule:
     - cron: '10 * * * *'

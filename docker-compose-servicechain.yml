@@ -3,7 +3,7 @@ services:
   CN-0:
     hostname: CN-0
     container_name: CN-0
-    image: klaytn/klaytn:latest
+    image: ${PARENT_KLAYTN_IMAGE}
     ports:
       - '32323'
       - '8551'
@@ -36,7 +36,7 @@ services:
     restart: "no"
   PN-0:
     hostname: PN-0
-    image: klaytn/klaytn:latest
+    image: ${PARENT_KLAYTN_IMAGE}
     container_name: PN-0
     ports:
       - '32323'
@@ -71,11 +71,11 @@ services:
     restart: "no"
   EN-0:
     hostname: EN-0
-    image: klaytn/klaytn:latest
+    image: ${PARENT_KLAYTN_IMAGE}
     container_name: EN-0
     ports:
       - '32323'
-      - '8102:8551'
+      - '${EN_PUBLIC_PORT}:8551'
       - '61001'
       - '50505'
     entrypoint:
@@ -112,13 +112,13 @@ services:
     restart: "no"
   SCN-0:
     hostname: SCN-0
-    image: klaytn/klaytn:latest
+    image: ${CHILD_KLAYTN_IMAGE}
     container_name: SCN-0
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
       - '32323'
-      - '8103:8551'
+      - '${SCN_PUBLIC_PORT}:8551'
       - '61001'
       - '50506'
       - '7551'

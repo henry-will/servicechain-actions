@@ -1,0 +1,14 @@
+# Intellij
+.idea
+
+# bridge-info output files
+test/common/bridge-info*.json
+
+# docker-compose
+certs
+
+# value transfer outputs
+test/**/transfer-config*.json
+
+# node
+**/node_modules

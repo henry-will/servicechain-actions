@@ -1,0 +1,14 @@
+{
+    "child" : {
+        "url": "http://localhost:8351",
+        "key": "0x6a98c76bae11151c5d74f9a007fdf689a7ca8aa3a78b1268fddf6d5df5348cf1",
+        "operator": "{CHILD_OPERATOR}",
+        "account": "0x7c24f4decc7a59f915d370faf89c63519e99bfcf"
+    },
+    "parent" : {
+        "url": "http://localhost:8451",
+        "key": "0x1dd4dc19688dde6b519f3d305349fa7cbc6f5c4195e72e0d12b665b2bc39a3a1",
+        "operator": "{PARENT_OPERATOR}",
+        "account": "0x25c274e622c4deb1dcfa211e75b7b4671cdb0db2"
+    }
+}

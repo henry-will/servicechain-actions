@@ -41,7 +41,7 @@ jobs:
       with:
         context: ./test/klaytn
         push: true
-        tags: servicechain-dev/klaytn:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/klaytn:latest
 
     - name: Start containers
       run: docker-compose -f "docker-compose-servicechain.yml" --env-file $DOCKER_COMPOSE_ENV_FILE up -d

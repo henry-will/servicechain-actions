@@ -20,10 +20,9 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Checkout klaytn
-      uses: actions/checkouts@v3
+      uses: actions/checkout@v3
       with:
         repository: henry-will/klaytn
-        token: ${{ secrets.ACTIONS_PAT }}
         ref: dev
         path: test/klaytn/src
 

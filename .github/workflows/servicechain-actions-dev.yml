@@ -13,7 +13,7 @@ on:
 env:
   DOCKER_COMPOSE_ENV_FILE: .env_dev
 jobs:
-  docker-compose:
+  remote-tests:
     timeout-minutes: 10
     runs-on: ubuntu-latest
 
@@ -24,7 +24,7 @@ jobs:
     - name: Checkout klaytn
       uses: actions/checkouts@v3
       with:
-        repository: klaytn/klaytn
+        repository: henry-will/klaytn
         ref: dev
         path: test/klaytn/src
 

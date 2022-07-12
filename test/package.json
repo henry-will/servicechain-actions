@@ -1,0 +1,10 @@
+{
+  "name": "servicechain-remote-test",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "caver-js": "^1.6.8"
+  }
+}

@@ -15,14 +15,14 @@ function sleep(ms) {
 async function parentTokenTransfer() {
   const testcase = process.argv[1].substring(process.argv[1].lastIndexOf('/') + 1).replace(/\.[^/.]+$/, "");
   console.log(`------------------------- parent sent to bob ${testcase} START -------------------------`)
-  const scnCaver = new Caver(conf.child.url);
-  const scnInstance = new scnCaver.klay.Contract(childTokenAbi, conf.child.token);
+  const scnCaver = new Caver(conf.url.child);
+  const scnInstance = new scnCaver.klay.Contract(childTokenAbi, conf.contract.child.token);
 
-  const enCaver = new Caver(conf.parent.url);
-  const enInstance = new enCaver.klay.Contract(parentTokenAbi, conf.parent.token);
+  const enCaver = new Caver(conf.url.parent);
+  const enInstance = new enCaver.klay.Contract(parentTokenAbi, conf.contract.parent.token);
 
-  conf.child.sender = scnCaver.klay.accounts.wallet.add(conf.child.key).address;
-  conf.parent.sender = enCaver.klay.accounts.wallet.add(conf.parent.key).address;
+  conf.sender.child.address = scnCaver.klay.accounts.wallet.add(conf.sender.child.key).address;
+  conf.sender.parent.address = enCaver.klay.accounts.wallet.add(conf.sender.parent.key).address;
   const bob = "0xd40b6909eb7085590e1c26cb3becc25368e249e9";
   
   try {
@@ -31,15 +31,16 @@ async function parentTokenTransfer() {
 
     // Transfer main chain to service chain
     console.log("requestValueTransfer..")
-    await enInstance.methods.requestValueTransfer(100, bob, 0, []).send({from:conf.parent.sender, gas: 1000000});
+    await enInstance.methods.requestValueTransfer(100, bob, 0, []).send({from:conf.sender.parent.address, gas: 1000000});
     // Wait event to be trasnferred to child chain and contained into new block
     await sleep(6000);
 
-    // Check alice balance in Service Chain
+    // Check bob balance in Service Chain
     balance = await scnInstance.methods.balanceOf(bob).call();
     console.log("bob balance:", balance);
   } catch (e) {
     console.log("Error:", e);
+    process.exit(1);
   }
   console.log(`------------------------- ${testcase} END -------------------------`)
 }
@@ -47,14 +48,14 @@ async function parentTokenTransfer() {
 async function childTokenTransfer() {
   const testcase = process.argv[1].substring(process.argv[1].lastIndexOf('/') + 1).replace(/\.[^/.]+$/, "");
   console.log(`------------------------- child send to alice ${testcase} START -------------------------`)
-  const scnCaver = new Caver(conf.child.url);
-  const scnInstance = new scnCaver.klay.Contract(childTokenAbi, conf.child.token);
+  const scnCaver = new Caver(conf.url.child);
+  const scnInstance = new scnCaver.klay.Contract(childTokenAbi, conf.contract.child.token);
 
-  const enCaver = new Caver(conf.parent.url);
-  const enInstance = new enCaver.klay.Contract(parentTokenAbi, conf.parent.token);
+  const enCaver = new Caver(conf.url.parent);
+  const enInstance = new enCaver.klay.Contract(parentTokenAbi, conf.contract.parent.token);
 
-  conf.child.sender = scnCaver.klay.accounts.wallet.add(conf.child.key).address;
-  conf.parent.sender = enCaver.klay.accounts.wallet.add(conf.parent.key).address;
+  conf.sender.child.address = scnCaver.klay.accounts.wallet.add(conf.sender.child.key).address;
+  conf.sender.parent.address = enCaver.klay.accounts.wallet.add(conf.sender.parent.key).address;
   const alice = "0xc40b6909eb7085590e1c26cb3becc25368e249e9";
 
   try {
@@ -63,8 +64,8 @@ async function childTokenTransfer() {
 
     // Transfer main chain to service chain
     console.log("requestValueTransfer..")
-    await scnInstance.methods.requestValueTransfer(100, alice, 0, []).send({from:conf.child.sender, gas: 1000000});
-    // Wait event to be trasnferred to child chain and contained into new block
+    await scnInstance.methods.requestValueTransfer(100, alice, 0, []).send({from:conf.sender.child.address, gas: 1000000});
+    // Wait event to be transferred to child chain and contained into new block
     await sleep(6000);
 
     // Check alice balance in Service Chain
@@ -72,6 +73,7 @@ async function childTokenTransfer() {
     console.log("alice balance:", balance);
   } catch (e) {
     console.log("Error:", e);
+    process.exit(1);
   }
   console.log(`------------------------- ${testcase} END -------------------------`)
 }

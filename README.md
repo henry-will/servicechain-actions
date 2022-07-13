@@ -13,3 +13,8 @@ docker-compose -f docker-compose-servicechain.yml --env-file .env_new_new down
 ```shell
 sh make-bridge-info.sh bridge-info-template.json ../common/bridge-info.json .env_new_new
 ```
+
+### testing in local
+```shell
+bash local_test.sh
+```

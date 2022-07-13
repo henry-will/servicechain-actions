@@ -4,4 +4,4 @@ export childBuildPath=../build-1.8.4
 export transferConfig=transfer-config.json
 
 echo "parentBuildPath : $parentBuildPath"
-echo "chileBuildPath : $childBuildPath"
+echo "childBuildPath : $childBuildPath"

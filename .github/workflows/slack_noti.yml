@@ -1,4 +1,12 @@
-name: "servicechain-actions"
+name: "slack-noti"
+on:
+ workflow_dispatch:
+  inputs:
+    logLevel:
+      description: 'Log level'
+      required: true
+      default: 'warning'    
+
 env:
   DOCKER_COMPOSE_ENV_FILE: .env_new_new
 jobs:

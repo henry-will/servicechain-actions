@@ -70,6 +70,7 @@ jobs:
       uses: voxmedia/github-action-slack-notify-build@v1
       with:
         channel: remote-tests-bot
+        channel_id: C03P2UU546A   
         status: SUCCESS
         color: good
 
@@ -80,5 +81,6 @@ jobs:
       uses: voxmedia/github-action-slack-notify-build@v1
       with:
         channel: remote-tests-bot
+        channel_id: C03P2UU546A
         status: FAILED
         color: danger

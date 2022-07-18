@@ -6,7 +6,6 @@ on:
         description: 'Env file name'
         required: true
         default: '.env_new_new'
-
 env:
   DOCKER_COMPOSE_ENV_FILE: ${{ inputs.envFile }}
 jobs:
@@ -25,7 +24,7 @@ jobs:
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel: remote-tests-bot
-          status: SUCCESS ${{ DOCKER_COMPOSE_ENV_FILE }}
+          status: SUCCESS $DOCKER_COMPOSE_ENV_FILE
           color: good
       
       - name: Notify slack fail

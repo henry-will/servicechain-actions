@@ -17,6 +17,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
+      - name: Checkout klaytn
+        uses: actions/checkout@v3
+        with:
+          repository: klaytn/klaytn
+          ref: dev
+          path: test/klaytn/src
+      - run: ls -al test/klaytn/src
+      
+      
       - name: Notify slack success
         if: success()
         env:

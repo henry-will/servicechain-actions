@@ -8,7 +8,7 @@ on:
         default: '.env_new_new'
 
 env:
-  DOCKER_COMPOSE_ENV_FILE: .env_new_new
+  DOCKER_COMPOSE_ENV_FILE: ${{ envFile }}
 jobs:
   docker-compose:
     timeout-minutes: 10
@@ -25,7 +25,7 @@ jobs:
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel: remote-tests-bot
-          status: SUCCESS
+          status: SUCCESS ${{ DOCKER_COMPOSE_ENV_FILE }}
           color: good
       
       - name: Notify slack fail

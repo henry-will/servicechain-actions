@@ -47,8 +47,8 @@ jobs:
         with:
           node-version: 12
       - run: cp servicechain-docker/bridge-info/bridge-info.json tests/value-transfer/config
-      - run: cd tests/value-transfer
-      - run: npm i
+      - run: cd tests/value-transfer && npm i
+      - run: ls -al
       
       - name: Test the ERC20 value transfer
         run: cd tests/value-transfer/ERC20 && bash run_testcase.sh

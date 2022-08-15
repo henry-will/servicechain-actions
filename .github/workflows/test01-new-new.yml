@@ -8,7 +8,7 @@ on:
         default: 'servicechain-docker/env/.env-new-new'
         
 env:
-  DOCKER_COMPOSE_ENV_FILE: ${{ envFile }}
+  DOCKER_COMPOSE_ENV_FILE: ${{ inputs.envFile }}
   
 jobs:
   value-transfer-tests:

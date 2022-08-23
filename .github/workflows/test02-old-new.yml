@@ -1,4 +1,4 @@
-name: "test01-oldParent-newChild"
+name: "test02-oldParent-newChild"
 on:
   workflow_dispatch:
     inputs:

@@ -68,3 +68,14 @@ jobs:
           channel: remote-tests-bot
           status: FAILED
           color: danger
+      - name: Logging EN entire log
+        if: failure()
+        run: |
+          cd servicechain-docker
+          docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T EN-0 cat /klaytn/log/kend.out
+      - name: Logging SCN entire log
+        if: failure()
+        run: |
+          cd servicechain-docker
+          docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T SCN-0 cat /klaytn/log/kscnd.out
+

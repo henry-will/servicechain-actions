@@ -60,29 +60,30 @@ jobs:
         if: failure()
         run: |
           cd servicechain-docker
+          docker logs EN-0 >& failed-logs/kend.out
           docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T EN-0 cat /klaytn/log/kend.out
-          docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T EN-0 cat /klaytn/log/kend.out > failed-logs/kend.out
           
       - name: Logging the kscnd.out of SCN node
         if: failure()
         run: |
           cd servicechain-docker
+          docker logs SCN-0 >& failed-logs/kscnd.out          
           docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T SCN-0 cat /klaytn/log/kscnd.out          
-          docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T SCN-0 cat /klaytn/log/kscnd.out > failed-logs/kscnd.out
         
       - name: Logging the kcnd.out of CN node when job was failed
         if: failure()
         run: |
           cd servicechain-docker
+          docker logs CN-0 >& failed-logs/kcnd.out                    
           docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T CN-0 cat /klaytn/log/kcnd.out
-          docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T CN-0 cat /klaytn/log/kcnd.out > failed-logs/kcnd.out
             
       - name: Logging the kpnd.out of PN node when job was failed
         if: failure()
         run: |
           cd servicechain-docker
+          docker logs PN-0 >& failed-logs/kpnd.out                              
           docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T PN-0 cat /klaytn/log/kpnd.out
-          docker-compose -f docker-compose-servicechain.yml --env-file $DOCKER_COMPOSE_ENV_FILE exec -T PN-0 cat /klaytn/log/kpnd.out > failed-logs/kpnd.out
+
       - name: Upload Logs
         if: failure()
         uses: actions/upload-artifact@v3

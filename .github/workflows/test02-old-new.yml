@@ -52,9 +52,11 @@ jobs:
       
       - name: Test the ERC20 value transfer
         run: cd tests/value-transfer/ERC20 && bash run_testcase.sh
-      - name: Logging the kend.out of EN node
+        
+      - name: Make failed-logs directory in case of failure
         if: failure()
-        run: mkdir failed-logs
+        run: |
+          cd servicechain-docker && mkdir failed-logs
 
       - name: Logging the kend.out of EN node
         if: failure()
@@ -89,7 +91,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: failed-logs
-          path: failed-logs
+          path: servicechain-docker/failed-logs
           retention-days: 10    
         
       - name: Stop containers

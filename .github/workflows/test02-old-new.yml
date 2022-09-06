@@ -54,7 +54,7 @@ jobs:
         run: cd tests/value-transfer/ERC20 && bash run_testcase.sh
         
       - name: Copy log files in the failed-logs directory in case of failure
-        if: failure()
+        if: always()
         run: |
           mkdir failed-logs
           docker logs CN-0 >& failed-logs/kcnd.out
@@ -63,12 +63,12 @@ jobs:
           docker logs SCN-0 >& failed-logs/kscnd.out
             
       - name: Upload failure logs
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: failed-logs
           path: failed-logs
-          retention-days: 10
+          retention-days: 90
         
       - name: Stop containers
         if: always()
